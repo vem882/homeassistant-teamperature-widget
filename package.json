@@ -17,6 +17,10 @@
     "fs": "^0.0.1-security"
   },
 "build": {
-  "icon": "assets/icon"
+  "icon": "assets/icon",
+  "publish": null,
+  "win": {
+    "target": "nsis"
+  }
 }
 }
