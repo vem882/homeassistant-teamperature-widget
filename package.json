@@ -15,5 +15,8 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security"
-  }
+  },
+"build": {
+  "icon": "assets/icon"
+}
 }
