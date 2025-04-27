@@ -4,7 +4,8 @@
   "description": "A simple Electron app to display the temperature from a Home Assistant entity.",
   "main": "main.js",
   "scripts": {
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "build": "electron-builder"
   },
   "keywords": [],
   "author": "vem882",
