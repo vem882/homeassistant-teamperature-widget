@@ -40,7 +40,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
     permissions: 
         contents: write
-        releases: write
     steps:
       - uses: actions/checkout@v4
 
