@@ -1,93 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <style>
-        body {
-            margin: 0;
-            padding: 10px;
-            background: rgba(30, 30, 30, 0.8);
-            color: white;
-            font-family: Arial;
-            border-radius: 8px;
-            transition: all 0.5s ease;
-        }
-    
-        /* Väriteemat */
-        body.cold {
-            background: rgba(0, 100, 200, 0.8);
-            color: #e6f3ff;
-        }
-        
-        body.normal {
-            background: rgba(30, 130, 30, 0.8);
-        }
-        
-        body.hot {
-            background: rgba(200, 30, 0, 0.8);
-            color: #ffe8e6;
-        }
-    
-        /* Animaatiot */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-    
-        #widget {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            -webkit-app-region: drag;
-            position: relative;
-        }
-        #house-svg {
-            flex-shrink: 0;
-        }
-        .pulse {
-            animation: pulse 1.5s infinite;
-            display: inline-block;
-        }
-        /* Talo värit */
-        .cold #house-body { fill: #2196f3; }
-        .normal #house-body { fill: #4caf50; }
-        .hot #house-body { fill: #e53935; }
-        /* Lämpömittari värit */
-        .cold #thermometer-mercury, .cold #thermometer-bulb { fill: #2196f3; }
-        .normal #thermometer-mercury, .normal #thermometer-bulb { fill: #4caf50; }
-        .hot #thermometer-mercury, .hot #thermometer-bulb { fill: #e53935; }
-    
-        #temp {
-            font-size: 15px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-            -webkit-app-region: no-drag;
-        }
-        #lock-icon {
-    position: absolute;
-    left: -13px;
-    top: -13px;
-    margin: 4px;
-    z-index: 10;
-    transition: opacity 0.2s;
-    -webkit-app-region: no-drag;
-    cursor: pointer;
-}
-.locked #lock-body,
-.locked #lock-dot {
-    stroke: #e53935;
-    fill: #e53935;
-}
-    </style>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' http://homeassistant.local:8123 https://homeassistant.local:8123 https://*.iconify.design; script-src 'self' https://code.iconify.design; style-src 'self' 'unsafe-inline'; img-src 'self' data:;">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div id="widget">
-        <svg id="lock-icon" width="17" height="17" style="cursor:pointer" viewBox="0 0 24 24">
-            <path id="lock-body" d="M6 10V8a6 6 0 1 1 12 0v2" fill="none" stroke="white" stroke-width="2"/>
-            <rect x="5" y="10" width="14" height="9" rx="2" fill="white" opacity="0.3"/>
-            <circle id="lock-dot" cx="12" cy="15" r="1.5" fill="white"/>
-        </svg>
+    <div id="widget" class="drag">
+        <span id="lock-icon">🔒</span>
+        <span id="settings-icon">⚙️</span>
             <!-- Talo ja lämpömittari -->
     <svg id="house-svg" width="32" height="32" viewBox="0 0 48 48">
         <!-- Katto -->
@@ -101,7 +21,7 @@
         <!-- Lämpömittari pallo -->
         <circle id="thermometer-bulb" cx="36" cy="42" r="4" fill="#ff5252"/>
     </svg>
-    <div id="temp">Ladataan...</div>
+    <div id="temp">loading...</div>
     </div>
     <script src="renderer.js"></script>
 </body>

@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+    padding: 10px;
+    background: rgba(30, 30, 30, 0.8);
+    color: white;
+    font-family: Arial;
+    border-radius: 8px;
+    transition: all 0.5s ease;
+}
+
+/* Background colors by temp */
+body.cold {
+    background: rgba(0, 100, 200, 0.8);
+    color: #e6f3ff;
+}
+
+body.normal {
+    background: rgba(30, 130, 30, 0.8);
+}
+
+body.hot {
+    background: rgba(200, 30, 0, 0.8);
+    color: #ffe8e6;
+}
+
+/* Animaatiot */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+#widget {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    -webkit-app-region: drag;
+    position: relative;
+}
+#widget.drag {
+ -webkit-app-region: drag;
+}
+#widget.no-drag {
+ -webkit-app-region: no-drag;
+}
+/*House icon styles*/
+#house-svg {
+    flex-shrink: 0;
+    position: absolute;
+    top: 7px;
+    margin: 0px;
+    z-index: 1;
+    -webkit-app-region: no-drag;
+    cursor: pointer;
+    left: -11px;
+}
+.pulse {
+    animation: pulse 1.5s infinite;
+    display: inline-block;
+}
+/* House colors */
+.cold #house-body { fill: #2196f3; }
+.normal #house-body { fill: #4caf50; }
+.hot #house-body { fill: #e53935; }
+/* Thermometer-Mercury colors */
+.cold #thermometer-mercury, .cold #thermometer-bulb { fill: #2196f3; }
+.normal #thermometer-mercury, .normal #thermometer-bulb { fill: #4caf50; }
+.hot #thermometer-mercury, .hot #thermometer-bulb { fill: #e53935; }
+/* Temperature text  */
+#temp {
+    font-size: 13px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    -webkit-app-region: no-drag;
+    position: absolute;
+    top: 16px;
+    margin: -2px;
+    z-index: 1;
+    -webkit-app-region: no-drag;
+    cursor: pointer;
+    left: 27px;
+}
+/* Lock and Settings icon styles*/
+#lock-icon, #settings-icon {
+position: absolute;
+top: -13px;
+margin: 4px;
+z-index: 10;
+-webkit-app-region: no-drag;
+cursor: pointer;
+}
+#lock-icon { left: -13px; }
+#settings-icon { left: 10px; }

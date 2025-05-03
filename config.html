@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Home Assistant Settings</title>
+  <link rel="stylesheet" href="config.css" />
+</head>
+<body>
+  <div class="container">
+    <h3>Configuration missing!</h3>
+    <p>Please enter your Home Assistant settings.</p>
+    <label>URL:
+      <input id="popup-ha-url" type="text" placeholder="http://homeassistant.local:8123">
+    </label>
+    <label>Token:
+      <input id="popup-ha-token" type="password" placeholder="Long-lived access token">
+    </label>
+    <label>Entity ID:
+      <input id="popup-ha-entity" type="text" placeholder="sensor.lampo_temperature">
+    </label>
+    <button id="popup-ok">Save</button>
+  </div>
+  <script>
+    // Esitäytä kentät localStoragen tiedoilla, jos löytyy
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        const config = JSON.parse(localStorage.getItem('ha_config'))
+        if (config) {
+          document.getElementById('popup-ha-url').value = config.HA_URL || ''
+          document.getElementById('popup-ha-token').value = config.HA_TOKEN || ''
+          document.getElementById('popup-ha-entity').value = config.ENTITY_ID || ''
+        }
+      } catch (e) {}
+    })
+
+    document.getElementById('popup-ok').onclick = () => {
+      const HA_URL = document.getElementById('popup-ha-url').value
+      const HA_TOKEN = document.getElementById('popup-ha-token').value
+      const ENTITY_ID = document.getElementById('popup-ha-entity').value
+      if (HA_URL && HA_TOKEN && ENTITY_ID) {
+        localStorage.setItem('ha_config', JSON.stringify({ HA_URL, HA_TOKEN, ENTITY_ID }))
+        if (window.opener) {
+          window.opener.location.reload()
+        }
+        window.close()
+      } else {
+        alert("Please fill all fields!")
+      }
+    }
+  </script>
+</body>
+</html>
